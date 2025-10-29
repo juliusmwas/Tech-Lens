@@ -4,13 +4,13 @@ import { IoMenu } from "react-icons/io5";
 
 export default function Navbar () {
     return(
-        <nav className="bg-blue-950">
+        <nav className="flex justify-between p-2 items-center bg-amber-200">
             <div>
-                <img src="/public/Logo .png" alt="" />
+               <h1>Tech <span>Lens</span></h1>
             </div>
 
             <div>
-                <ul>
+                <ul className="flex justify-between items-center gap-5">
                     <li>Home</li>
                     <li>Articles</li>
                     <li>Categories</li>
@@ -19,11 +19,13 @@ export default function Navbar () {
                 </ul>
             </div>
 
-            <div>
+            <div className="flex justify-between items-center gap-5">
                 <FaMoon />
                 <FiSun />
-                <IoMenu />
+                <IoMenu className="hidden"/>
+                <button>Get Started</button>
             </div>
+
         </nav>
     );
 }
