@@ -1,22 +1,9 @@
 @import "tailwindcss";
 
-:root {
-  --color-bg: #ffffff;
-  --color-surface: #f9fafb;
-  --color-text: #1e293b;
-  --color-muted: #64748b;
-  --color-primary: #0ea5e9;
-  --color-accent: #14b8a6;
-  --color-border: #e2e8f0;
+body {
+  @apply bg-gradient-to-br from-slate-100 via-white to-slate-300 min-h-screen;
 }
 
-.dark {
-  --color-bg: #0d1117;
-  --color-surface: #161b22;
-  --color-text: #e2e8f0;
-  --color-muted: #94a3b8;
-  --color-primary: #38bdf8;
-  --color-accent: #2dd4bf;
-  --color-border: #334155;
+html {
+  scroll-behavior: smooth;
 }
-
