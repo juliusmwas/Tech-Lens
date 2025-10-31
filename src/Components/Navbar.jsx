@@ -26,7 +26,7 @@ export default function Navbar () {
     }, [isFocused]);
 
     return(
-        <nav className="flex  justify-between p-3 h-20 shadow-lg items-center bg-gradient-to-r from-slate-100 via-white to-slate-200 text-slate-800 ">
+        <nav className="flex  justify-between p-3 h-20 shadow-sm items-center bg-gradient-to-r from-slate-200 via-white to-slate-300 text-slate-800 ">
             <div className="flex items-center gap-2 px-5">
                 <span className="text-blue-700"><RiCameraLensAiLine className="text-3xl" /></span>
                 <h1 className="font-bold text-3xl">TechLens</h1>
@@ -34,7 +34,7 @@ export default function Navbar () {
  
             <div>
                 <ul className="flex justify-between  font-normal text-sm items-center gap-5">
-                    <li><a href="#" className="hover:font-medium">Home</a></li>
+                    <li><a href="#home" className="hover:font-medium">Home</a></li>
                     <li><a href="#" className="hover:font-medium">Articles</a></li>
                     <li><a href="#" className="hover:font-medium">Categories</a></li>
                     <li><a href="#" className="hover:font-medium">Resources</a></li>
@@ -46,7 +46,7 @@ export default function Navbar () {
             <div
                 ref={containerRef}
                 onClick={() => setIsFocused(true)}
-                className={`flex items-center bg-surface border border-border rounded-lg px-3 py-1 cursor-text transition-all duration-300
+                className={`flex items-center bg-surface border border-gray-400 rounded-lg px-3 py-1 cursor-text transition-all duration-300
                     ${isFocused ? "w-52 sm:w-72" : "w-28"}
                 `}
                 >
@@ -63,8 +63,8 @@ export default function Navbar () {
 
             <div className="flex justify-between items-center gap-5">
                 <IoMenu className="hidden"/>
-                <button className=" px-3 py-1 rounded-lg border-2 font-medium cursor-pointer">Sign in</button>
-                <button className="bg-slate-800 text-slate-100 px-3 py-1 rounded-lg border-2 font-medium cursor-pointer">Get Started</button>
+                <button className=" px-3 py-1 rounded-lg border border-gray-400 font-medium cursor-pointer">Sign in</button>
+                <button className="bg-slate-800 text-slate-100 px-3 py-1 rounded-lg  font-medium cursor-pointer">Get Started</button>
             </div>
 
         </nav>
