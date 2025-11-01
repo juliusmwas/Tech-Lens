@@ -46,7 +46,7 @@ export default function Navbar () {
                         <li><a href="#" className="hover:font-medium">Categories</a></li>
                         <li><a href="#" className="hover:font-medium">Resources</a></li>
                         <li><a href="#" className="hover:font-medium">About</a></li>
-                        <li><a href="#" className="hover:font-medium">Contact</a></li>
+                        
                     </ul>
                 </div>
 
@@ -86,7 +86,6 @@ export default function Navbar () {
                 <li><a href="#" className="hover:font-medium">Categories</a></li>
                 <li><a href="#" className="hover:font-medium">Resources</a></li>
                 <li><a href="#" className="hover:font-medium">About</a></li>
-                <li><a href="#" className="hover:font-medium">Contact</a></li>
                 <button className=" px-3 py-1  rounded-lg border w-full border-gray-400 font-normal cursor-pointer">Sign in</button>
                 <button className="bg-white text-slate-800 w-full px-3 py-1 rounded-lg  font-normal cursor-pointer">Get Started</button>
             </ul>  
