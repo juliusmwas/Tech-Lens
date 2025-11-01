@@ -88,7 +88,7 @@ export default function Navbar () {
                 <li><a href="#" className="hover:font-medium">About</a></li>
                 <li><a href="#" className="hover:font-medium">Contact</a></li>
                 <button className=" px-3 py-1  rounded-lg border w-full border-gray-400 font-normal cursor-pointer">Sign in</button>
-                <button className="bg-slate-800 text-slate-100 w-full px-3 py-1 rounded-lg  font-normal cursor-pointer">Get Started</button>
+                <button className="bg-white text-slate-800 w-full px-3 py-1 rounded-lg  font-normal cursor-pointer">Get Started</button>
             </ul>  
         </div>
             {toggle && <div className="fixed top-20 left-0 w-full h-full  transition-opacity duration-300 z-40" onClick={() => setToggle(false)}></div>} 
