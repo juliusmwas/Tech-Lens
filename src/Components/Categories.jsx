@@ -29,7 +29,7 @@ useEffect(() => {
         <section id="#categories" className="bg-blue-100 lg:p-4">
             <div>
                 <div className="grid text-center justify-items-center ">
-                    <p className="mb-5 text-lg font-medium">Explore Different Categories</p>
+                    <p className="m-5 lg:mb-5 text-sm lg:text-lg font-medium">Explore Different Categories</p>
                 </div>
 
                 <div
