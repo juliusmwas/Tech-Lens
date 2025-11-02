@@ -8,7 +8,7 @@ import { HiUserGroup } from "react-icons/hi2";
 
 export default function Publish(){
     return(
-        <section id="#publish">
+        <section id="publish">
            <div className="flex flex-col p-3 bg-slate-200">
                 <div className="flex items-center justify-center py-3 gap-15 ">
                     <img 
@@ -31,7 +31,7 @@ export default function Publish(){
 
 
                 <div className=" p-3">
-                    <h1 className="grid justify-items-center mt-8 text-2xl font-medium">Why Publish on Techlens?</h1>
+                    <h1 className="grid justify-items-center mt-8 text-2xl font-semibold">Why Publish on Techlens?</h1>
 
                     <div className="flex items-center justify-center  mt-10 gap-6">
                         {/* Card 1 */}

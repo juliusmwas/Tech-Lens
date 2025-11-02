@@ -42,9 +42,9 @@ export default function Navbar () {
                 <div>
                     <ul className=" justify-between  font-normal text-sm items-center gap-5 hidden lg:flex">
                         <li><a href="#home" className="hover:font-medium">Home</a></li>
-                        <li><a href="#articles" className="hover:font-medium">Articles</a></li>
                         <li><a href="#" className="hover:font-medium">Categories</a></li>
-                        <li><a href="#" className="hover:font-medium">Resources</a></li>
+                        <li><a href="#articles" className="hover:font-medium">Articles</a></li>
+                        <li><a href="#publish" className="hover:font-medium">Publish</a></li>
                         <li><a href="#" className="hover:font-medium">About</a></li>
                         
                     </ul>
@@ -82,9 +82,9 @@ export default function Navbar () {
         <div className={`w-3/4 grid justify-items-center fixed z-50 right-0 h-full top-20 bg-slate-800 transition-transform duration-300 ${toggle ? "translate-x-0" : "translate-x-full"}`} >
             <ul className="flex flex-col p-2 text-slate-100  font-normal text-sm items-center gap-5">
                 <li><a href="#home" className="hover:font-medium">Home</a></li>
-                <li><a href="#articles" className="hover:font-medium">Articles</a></li>
                 <li><a href="#" className="hover:font-medium">Categories</a></li>
-                <li><a href="#" className="hover:font-medium">Resources</a></li>
+                <li><a href="#articles" className="hover:font-medium">Articles</a></li>
+                <li><a href="#publish" className="hover:font-medium">Publish</a></li>
                 <li><a href="#" className="hover:font-medium">About</a></li>
                 <button className=" px-3 py-1  rounded-lg border w-full border-gray-400 font-normal cursor-pointer">Sign in</button>
                 <button className="bg-white text-slate-800 w-full px-3 py-1 rounded-lg  font-normal cursor-pointer">Get Started</button>

@@ -9,7 +9,7 @@ export default function Articles() {
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 mt-5 mb-5 p-3">
                 
 
-                <div className="max-w-sm mx-auto p-4 bg-white rounded-xl shadow-sm">
+                <div className="max-w-sm mx-auto p-4 bg-slate-100 rounded-xl shadow-sm">
                     <div 
                         className="relative p-8 rounded-lg mb-4 flex justify-center items-center h-48"
                         style={{ 
@@ -28,7 +28,7 @@ export default function Articles() {
                     <div className="text-gray-600">
                         <p className="text-sm mb-1"><span className="font-medium text-gray-800"></span>Ethan Caldwell</p>
                         {/* Title */}
-                        <h2 className="text-2xl font-bold text-gray-900 mb-2 leading-tight">AI Revolution: How LLMs Are Shaping the Future</h2>
+                        <h2 className="text-2xl font-bold text-gray-900 mb-2 leading-tight">How LLMs Are Shaping the Future</h2>
                         {/* Description */}
                         <p className="text-sm text-gray-500">The rise of generative models is transforming software...</p>
                     </div>
@@ -41,7 +41,7 @@ export default function Articles() {
 
                 </div>
                 
-                <div className="max-w-sm mx-auto p-4 bg-white rounded-xl shadow-sm">
+                <div className="max-w-sm mx-auto p-4 bg-slate-100 rounded-xl shadow-sm">
                     <div 
                         className="relative p-8 rounded-lg mb-4 flex justify-center items-center h-48"
                         style={{ 
@@ -60,7 +60,7 @@ export default function Articles() {
                     <div className="text-gray-600">
                         <p className="text-sm mb-1"><span className="font-medium text-gray-800"></span>Ethan Caldwell</p>
                         {/* Title */}
-                        <h2 className="text-2xl font-bold text-gray-900 mb-2 leading-tight">AI Revolution: How LLMs Are Shaping the Future</h2>
+                        <h2 className="text-2xl font-bold text-gray-900 mb-2 leading-tight">How LLMs Are Shaping the Future</h2>
                         {/* Description */}
                         <p className="text-sm text-gray-500">The rise of generative models is transforming software...</p>
                     </div>
@@ -73,7 +73,7 @@ export default function Articles() {
 
                 </div>
 
-                <div className="max-w-sm mx-auto p-4 bg-white rounded-xl shadow-sm">
+                <div className="max-w-sm mx-auto p-4 bg-slate-100 rounded-xl shadow-sm">
                     <div 
                         className="relative p-8 rounded-lg mb-4 flex justify-center items-center h-48"
                         style={{ 
@@ -92,7 +92,7 @@ export default function Articles() {
                     <div className="text-gray-600">
                         <p className="text-sm mb-1"><span className="font-medium text-gray-800"></span>Ethan Caldwell</p>
                         {/* Title */}
-                        <h2 className="text-2xl font-bold text-gray-900 mb-2 leading-tight">AI Revolution: How LLMs Are Shaping the Future</h2>
+                        <h2 className="text-2xl font-bold text-gray-900 mb-2 leading-tight">How LLMs Are Shaping the Future</h2>
                         {/* Description */}
                         <p className="text-sm text-gray-500">The rise of generative models is transforming software...</p>
                     </div>
@@ -105,7 +105,7 @@ export default function Articles() {
 
                 </div>
 
-                <div className="max-w-sm mx-auto p-4 bg-white rounded-xl shadow-sm">
+                <div className="max-w-sm mx-auto p-4 bg-slate-100 rounded-xl shadow-sm">
                     <div 
                         className="relative p-8 rounded-lg mb-4 flex justify-center items-center h-48"
                         style={{ 
@@ -124,7 +124,7 @@ export default function Articles() {
                     <div className="text-gray-600">
                         <p className="text-sm mb-1"><span className="font-medium text-gray-800"></span>Ethan Caldwell</p>
                         {/* Title */}
-                        <h2 className="text-2xl font-bold text-gray-900 mb-2 leading-tight">AI Revolution: How LLMs Are Shaping the Future</h2>
+                        <h2 className="text-2xl font-bold text-gray-900 mb-2 leading-tight">How LLMs Are Shaping the Future</h2>
                         {/* Description */}
                         <p className="text-sm text-gray-500">The rise of generative models is transforming software...</p>
                     </div>

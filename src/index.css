@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 body {
-  @apply bg-gradient-to-br from-slate-100 via-white to-slate-300 min-h-screen;
+  @apply bg-slate-200;
 }
 
 html {
