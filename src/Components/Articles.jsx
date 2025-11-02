@@ -6,10 +6,10 @@ export default function Articles() {
 
     return(
         <section id="articles">
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 mt-5">
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 mt-5 mb-5 p-3">
                 
 
-                <div className="max-w-sm mx-auto p-4 bg-white rounded-xl shadow-xl">
+                <div className="max-w-sm mx-auto p-4 bg-white rounded-xl shadow-sm">
                     <div 
                         className="relative p-8 rounded-lg mb-4 flex justify-center items-center h-48"
                         style={{ 
@@ -41,7 +41,7 @@ export default function Articles() {
 
                 </div>
                 
-                <div className="max-w-sm mx-auto p-4 bg-white rounded-xl shadow-xl">
+                <div className="max-w-sm mx-auto p-4 bg-white rounded-xl shadow-sm">
                     <div 
                         className="relative p-8 rounded-lg mb-4 flex justify-center items-center h-48"
                         style={{ 
@@ -73,7 +73,7 @@ export default function Articles() {
 
                 </div>
 
-                <div className="max-w-sm mx-auto p-4 bg-white rounded-xl shadow-xl">
+                <div className="max-w-sm mx-auto p-4 bg-white rounded-xl shadow-sm">
                     <div 
                         className="relative p-8 rounded-lg mb-4 flex justify-center items-center h-48"
                         style={{ 
@@ -105,7 +105,7 @@ export default function Articles() {
 
                 </div>
 
-                <div className="max-w-sm mx-auto p-4 bg-white rounded-xl shadow-xl">
+                <div className="max-w-sm mx-auto p-4 bg-white rounded-xl shadow-sm">
                     <div 
                         className="relative p-8 rounded-lg mb-4 flex justify-center items-center h-48"
                         style={{ 
