@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from "react";
 import { IoMenu, IoClose } from "react-icons/io5";
 import { RiCameraLensAiLine } from "react-icons/ri";
 import { CiSearch } from "react-icons/ci";
+import { Link } from "react-router-dom";
+
 
 
 export default function Navbar () {
@@ -45,7 +47,7 @@ export default function Navbar () {
                         <li><a href="#" className="hover:font-medium">Categories</a></li>
                         <li><a href="#articles" className="hover:font-medium">Articles</a></li>
                         <li><a href="#publish" className="hover:font-medium">Publish</a></li>
-                        <li><a href="#" className="hover:font-medium">About</a></li>
+                        <Link to="/about" className="hover:text-primary">About</Link>
                         
                     </ul>
                 </div>
@@ -85,7 +87,7 @@ export default function Navbar () {
                 <li><a href="#" className="hover:font-medium">Categories</a></li>
                 <li><a href="#articles" className="hover:font-medium">Articles</a></li>
                 <li><a href="#publish" className="hover:font-medium">Publish</a></li>
-                <li><a href="#" className="hover:font-medium">About</a></li>
+                <Link to="/about" className="hover:text-primary">About</Link>
                 <button className=" px-3 py-1  rounded-lg border w-full border-gray-400 font-normal cursor-pointer">Sign in</button>
                 <button className="bg-white text-slate-800 w-full px-3 py-1 rounded-lg  font-normal cursor-pointer">Get Started</button>
             </ul>  

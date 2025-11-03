@@ -3,6 +3,7 @@ import { FaXTwitter } from "react-icons/fa6";
 import { FaLinkedin } from "react-icons/fa6";
 import { IoLogoInstagram } from "react-icons/io";
 import { RiCameraLensAiLine } from "react-icons/ri";
+import { Link } from "react-router-dom";
 
 
 
@@ -24,19 +25,21 @@ export default function Footer(){
                     <div className="mt-5 mb-5 w-64">
                         <h2 className="text-lg font-medium">Quick Links</h2>
                         <ul className="text-gray-400 text-sm">
-                            <li><a href="">Home</a></li>
-                            <li><a href="">Articles</a></li>
-                            <li><a href="">Publish</a></li>
+                            <li><a href="#home">Home</a></li>
+                            <li><a href="#articles">Articles</a></li>
+                            <li><a href="#publish">Publish</a></li>
+                            <Link to="/about" className="hover:text-primary">About</Link>
+
                         </ul>
                     </div>
 
                     <div className="mt-5 mb-5 w-64">
                         <h2 className="text-lg font-medium">Categories</h2>
                         <ul className="text-gray-400 text-sm">
-                            <li><a href="">AI & Machine Learning</a></li>
-                            <li><a href="">Web Development</a></li>
-                            <li><a href="">Cloud & DevOps</a></li>
-                            <li><a href=""><li><a href="">AI & Machine Learning</a></li></a></li>
+                            <li><a href="#">AI & Machine Learning</a></li>
+                            <li><a href="#">Web Development</a></li>
+                            <li><a href="#">Cloud & DevOps</a></li>
+                            <li><a href="#"><li><a href="">AI & Machine Learning</a></li></a></li>
                         </ul>
                     </div>
 
