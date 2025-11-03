@@ -12,27 +12,27 @@ export default function Footer(){
 
     return(
         <section id="footer">
-            <div>
-                <div className="grid grid-cols-4">
+            <div className="bg-slate-800 mt-10 text-slate-200">
+                <div className="flex justify-between px-10">
 
-                    <div>
-                        <h1><RiCameraLensAiLine/> Tech Lens</h1>
-                        <p>Your daily lens on modern technology</p>
-                        <p>Curated insights fro developers.</p>
+                    <div className="mt-5 mb-5 w-64">
+                        <h1 className="flex items-center gap-2 text-2xl font-bold"><RiCameraLensAiLine /> TechLens</h1>
+                        <p className="text-gray-400 text-sm mt-2">Your daily lens on modern technology</p>
+                        <p className="text-gray-400 text-sm mt-2">Curated insights for developers and innovators.</p>
                     </div>
 
-                    <div>
-                        <p>Quick Links</p>
-                        <ul>
+                    <div className="mt-5 mb-5 w-64">
+                        <h2 className="text-lg font-medium">Quick Links</h2>
+                        <ul className="text-gray-400 text-sm">
                             <li><a href="">Home</a></li>
                             <li><a href="">Articles</a></li>
                             <li><a href="">Publish</a></li>
                         </ul>
                     </div>
 
-                    <div>
-                        <p>Categories</p>
-                        <ul>
+                    <div className="mt-5 mb-5 w-64">
+                        <h2 className="text-lg font-medium">Categories</h2>
+                        <ul className="text-gray-400 text-sm">
                             <li><a href="">AI & Machine Learning</a></li>
                             <li><a href="">Web Development</a></li>
                             <li><a href="">Cloud & DevOps</a></li>
@@ -40,26 +40,26 @@ export default function Footer(){
                         </ul>
                     </div>
 
-                    <div>
-                        <p>Follow Us</p>
-                        <ul>
-                            <li><a href=""><FaXTwitter /></a></li>
-                            <li><a href=""><FaLinkedin /></a></li>
-                            <li><a href=""><IoLogoInstagram /></a></li>
+                    <div className="mt-5 mb-5 w-64">
+                        <h2 className="text-lg font-medium">Follow Us</h2>
+                        <ul className="text-gray-400 text-sm">
+                            <li className="mt-2"><a href=""><FaXTwitter /></a></li>
+                            <li className="mt-2"><a href=""><FaLinkedin /></a></li>
+                            <li className="mt-2"><a href=""><IoLogoInstagram /></a></li>
                         </ul>
                     </div>
 
                 </div>
 
-                <hr />
+                <hr class="h-px my-3 bg-gray-200 border-0 dark:bg-gray-700" />
 
-                <div>
-                    <p>© 2025 Tech Lens. All rights reserved.</p>
+                <div className="flex items-center justify-between px-10 py-3 mt-5">
+                    <p className="text-gray-400 text-sm mb-2">© 2025 Tech Lens. All rights reserved.</p>
                     
-                    <ul>
+                    <ul className="flex items-center text-gray-400 text-sm mb-2 gap-5">
                         <li><a href="">Terms of Use</a></li>
                         <li><a href="">Privacy Policy</a></li>
-                        <li><a href="">Back to top <FaArrowUp /></a></li>
+                        <button className="flex items-center cursor-pointer gap-2">Back to top <FaArrowUp /></button>
                     </ul>
             
                 </div>
