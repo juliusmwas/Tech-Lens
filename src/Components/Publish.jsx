@@ -2,6 +2,8 @@ import { AiOutlineGlobal } from "react-icons/ai";
 import { FaArrowRight } from "react-icons/fa6";
 import { HiOutlineBriefcase } from "react-icons/hi";
 import { HiUserGroup } from "react-icons/hi2";
+import { MdOutlineMailOutline } from "react-icons/md";
+
 
 
 
@@ -57,11 +59,23 @@ export default function Publish(){
                     </div>
 
 
-                    <div className="flex justify-center mt-8">
-                        <div className="bg-slate-800 inline-block text-center py-6 px-12 rounded-xl">
-                            <h2 className="text-white text-lg font-semibold">Ready to inspire others?</h2>
-                            <button className="mt-4 px-3 py-1 bg-slate-600 text-white rounded-lg cursor-pointer">Join as Contributor </button>
-                        </div>
+                    <div className="grid justify-items-center mt-8">
+                        <div className="bg-slate-400 inline-block w-90  p-6 shadow-sm rounded-xl">
+                            <div className="flex items-center gap-5 mb-2">
+                                <MdOutlineMailOutline className="text-lg" />
+                                <p className="text-gray-600 text-sm">Stay in the loop</p>
+                            </div>
+                            <h2 className="text-slate-800 text-2xl font-semibold mb-3">Subscribe to Tech Lens</h2>
+                            <p className="text-gray-600 text-sm mb-3">Get weekly insights, curated  tutorials, and the latest tech stories  straight to your inbox.</p>
+
+                            <div className="flex items-center gap-3">
+                                <input type="email"
+                                placeholder="enter email address..."
+                                className="bg-white rounded-sm px-2 py-1 text-sm" />
+                                <button className=" px-3 py-1 bg-slate-600 text-sm text-white rounded-lg cursor-pointer">Subscribe</button>
+                            </div>
+                            </div>
+                            
                     </div>
 
 
