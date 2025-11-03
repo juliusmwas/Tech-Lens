@@ -1,9 +1,9 @@
-import Navbar from "./Components/Navbar"
-import Hero from "./Components/Hero"
-import Categories from "./Components/Categories"
-import Articles from "./Components/Articles"
-import Publish from "./Components/Publish"
-import Footer from "./Components/Footer"
+import Navbar from "./Components/Homepage/Navbar"
+import Hero from "./Components/Homepage/Hero"
+import Categories from "./Components/Homepage/Categories"
+import Articles from "./Components/Homepage/Articles"
+import Publish from "./Components/Homepage/Publish"
+import Footer from "./Components/Homepage/Footer"
 
 export default function App() {
  

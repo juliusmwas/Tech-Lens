@@ -60,17 +60,17 @@ export default function Publish(){
 
 
                     <div className="grid justify-items-center mt-8">
-                        <div className="bg-slate-400 inline-block w-90  p-6 shadow-sm rounded-xl">
+                        <div className="bg-slate-300 inline-block w-90  p-6 shadow-sm rounded-xl">
                             <div className="flex items-center gap-5 mb-2">
                                 <MdOutlineMailOutline className="text-lg" />
-                                <p className="text-gray-600 text-sm">Stay in the loop</p>
+                                <p className="text-gray-00 text-sm">Stay in the loop</p>
                             </div>
                             <h2 className="text-slate-800 text-2xl font-semibold mb-3">Subscribe to Tech Lens</h2>
                             <p className="text-gray-600 text-sm mb-3">Get weekly insights, curated  tutorials, and the latest tech stories  straight to your inbox.</p>
 
                             <div className="flex items-center gap-3">
                                 <input type="email"
-                                placeholder="enter email address..."
+                                placeholder="Email address..."
                                 className="bg-white rounded-sm px-2 py-1 text-sm" />
                                 <button className=" px-3 py-1 bg-slate-600 text-sm text-white rounded-lg cursor-pointer">Subscribe</button>
                             </div>
