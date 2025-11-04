@@ -3,10 +3,14 @@ import { IoMenu, IoClose } from "react-icons/io5";
 import { RiCameraLensAiLine } from "react-icons/ri";
 import { CiSearch } from "react-icons/ci";
 import { Link } from "react-router-dom";
+import Modal from "./Modal";
 
 
 
 export default function Navbar () {
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
 
     const [isFocused, setIsFocused] = useState(false);
     const inputRef = useRef(null);
@@ -74,8 +78,8 @@ export default function Navbar () {
                     {toggle? <IoClose /> :  <IoMenu/> }
                 </div>
                 <div className="hidden lg:flex justify-between items-center gap-5">
-                    <button className=" px-3 py-1 rounded-lg border border-gray-400 font-medium cursor-pointer">Sign in</button>
-                    <button className="bg-slate-800 text-slate-100 px-3 py-1 rounded-lg  font-medium cursor-pointer">Get Started</button>
+                    <button onClick={() => setIsModalOpen(true)} className=" px-3 py-1 rounded-lg border border-gray-400 font-medium cursor-pointer">Sign in</button>
+                    <button onClick={() => setIsModalOpen(true)} className="bg-slate-800 text-slate-100 px-3 py-1 rounded-lg  font-medium cursor-pointer">Get Started</button>
                 </div>
             </nav>
         
@@ -92,7 +96,12 @@ export default function Navbar () {
                 <button className="bg-white text-slate-800 w-full px-3 py-1 rounded-lg  font-normal cursor-pointer">Get Started</button>
             </ul>  
         </div>
-            {toggle && <div className="fixed top-20 left-0 w-full h-full  transition-opacity duration-300 z-40" onClick={() => setToggle(false)}></div>} 
+            {toggle && (<div className="fixed top-20 left-0 w-full h-full bg-black/50 transition-opacity duration-300 z-40" onClick={() => setToggle(false)}></div>
+)}
+
+
+            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+
         </div>
     );
 }
