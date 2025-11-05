@@ -6,6 +6,7 @@ import Articles from "./Components/Homepage/Articles";
 import Publish from "./Components/Homepage/Publish";
 import Footer from "./Components/Homepage/Footer";
 import About from "./Components/Pages/About";
+import Profile from "./Components/Users/Profile";
 
 export default function App() {
   return (
@@ -29,6 +30,7 @@ export default function App() {
 
         {/* About page route */}
         <Route path="/about" element={<About />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </Router>
   );
