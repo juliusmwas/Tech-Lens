@@ -1,11 +1,17 @@
 import { PiHandsClappingThin } from "react-icons/pi";
 import { FaRegCommentDots } from "react-icons/fa6";
-
+import { Link } from 'react-router-dom';
 
 export default function Articles() {
 
+           
+
+
     return(
         <section id="articles">
+            <div className="grid justify-items-center text-3xl font-medium mt-5 mb-10">
+                <h1 >Featured  Articles</h1>
+            </div>
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 mt-5 mb-5 p-3">
                 
 
@@ -138,10 +144,15 @@ export default function Articles() {
                 </div>
 
             </div>
-            
+        
+            <div className="grid justify-items-center">
+                  <Link     to="/Articlespage" 
+                            className="px-4 py-2 bg-slate-800 text-white font-semibold rounded-lg shadow-md mt-5 mb-10 transition duration-300"> Explore All Articles →</Link>
+            </div>
+             
 
         
 
         </section>
     );
-}
+};

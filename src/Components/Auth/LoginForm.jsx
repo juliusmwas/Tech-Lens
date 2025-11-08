@@ -15,9 +15,12 @@ export default function LoginForm({ onLoginSuccess }) {
     setLoading(true);
     setError("");
 
-    const endpoint = isLogin
-      ? "http://localhost:5000/api/auth/login"
-      : "http://localhost:5000/api/auth/register";
+   const endpoint = isLogin
+  ? "http://localhost:5000/api/auth/login"
+  : "http://localhost:5000/api/auth/signup";
+
+console.log("🧾 Sending data:", formData);
+
 
     try {
       const res = await fetch(endpoint, {
@@ -26,14 +29,16 @@ export default function LoginForm({ onLoginSuccess }) {
         body: JSON.stringify(formData),
       });
 
+      if (!res.ok) {
+        const text = await res.text();
+        throw new Error(text || "Something went wrong");
+      }
+
       const data = await res.json();
-
-      if (!res.ok) throw new Error(data.message || "Something went wrong");
-
       console.log("✅ Success:", data);
 
-      // Optionally save token
-      localStorage.setItem("token", data.token);
+      if (data.token) localStorage.setItem("token", data.token);
+      setFormData({ username: "", email: "", password: "" });
 
       onLoginSuccess();
     } catch (err) {

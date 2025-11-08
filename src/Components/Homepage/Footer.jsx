@@ -39,7 +39,7 @@ export default function Footer(){
                             <li><a href="#">AI & Machine Learning</a></li>
                             <li><a href="#">Web Development</a></li>
                             <li><a href="#">Cloud & DevOps</a></li>
-                            <li><a href="#"><li><a href="">AI & Machine Learning</a></li></a></li>
+                            <li><a href="#">AI & Machine Learning</a></li>
                         </ul>
                     </div>
 

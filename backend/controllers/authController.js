@@ -8,8 +8,8 @@ const JWT_SECRET = process.env.JWT_SECRET || "replace_this_in_prod";
 // Signup
 export const signup = async (req, res) => {
   try {
-    const { name, username, email, password } = req.body;
-    if (!name || !username || !email || !password) {
+    const { username, email, password } = req.body;
+    if ( !username || !email || !password) {
       return res.status(400).json({ message: "All fields are required." });
     }
 
@@ -22,7 +22,7 @@ export const signup = async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const passwordHash = await bcrypt.hash(password, salt);
 
-    const user = new User({ name, username, email, passwordHash });
+    const user = new User({ username, email, passwordHash });
     await user.save();
 
     const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: "7d" });
@@ -31,7 +31,6 @@ export const signup = async (req, res) => {
       message: "User created",
       user: {
         id: user._id,
-        name: user.name,
         username: user.username,
         email: user.email,
         avatarUrl: user.avatarUrl,
@@ -67,7 +66,6 @@ export const login = async (req, res) => {
       message: "Login successful",
       user: {
         id: user._id,
-        name: user.name,
         username: user.username,
         email: user.email,
         avatarUrl: user.avatarUrl,
