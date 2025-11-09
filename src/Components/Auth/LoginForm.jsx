@@ -11,43 +11,61 @@ export default function LoginForm({ onLoginSuccess }) {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError("");
+  e.preventDefault();
+  setLoading(true);
+  setError("");
 
-   const endpoint = isLogin
-  ? "http://localhost:5000/api/auth/login"
-  : "http://localhost:5000/api/auth/signup";
+  let payload;
 
-console.log("🧾 Sending data:", formData);
+  if (isLogin) {
+    // For login → backend expects emailOrUsername + password
+    payload = {
+      emailOrUsername: formData.email || formData.username,
+      password: formData.password,
+    };
+  } else {
+    // For signup → backend expects name, username, email, password
+    payload = {
+      name: formData.username, // you can add a separate name field if you prefer
+      username: formData.username,
+      email: formData.email,
+      password: formData.password,
+    };
+  }
 
+  const endpoint = isLogin
+    ? "http://localhost:5000/api/auth/login"
+    : "http://localhost:5000/api/auth/signup";
 
-    try {
-      const res = await fetch(endpoint, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+  console.log("🧾 Sending data:", payload);
 
-      if (!res.ok) {
-        const text = await res.text();
-        throw new Error(text || "Something went wrong");
-      }
+  try {
+    const res = await fetch(endpoint, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
 
-      const data = await res.json();
-      console.log("✅ Success:", data);
-
-      if (data.token) localStorage.setItem("token", data.token);
-      setFormData({ username: "", email: "", password: "" });
-
-      onLoginSuccess();
-    } catch (err) {
-      console.error("❌ Error:", err);
-      setError(err.message);
-    } finally {
-      setLoading(false);
+    if (!res.ok) {
+      const text = await res.text();
+      throw new Error(text || "Something went wrong");
     }
-  };
+
+    const data = await res.json();
+    console.log("✅ Success:", data);
+
+    if (data.token) localStorage.setItem("token", data.token);
+    setFormData({ username: "", email: "", password: "" });
+
+    onLoginSuccess();
+  } catch (err) {
+    console.error("❌ Error:", err);
+    setError(err.message);
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <div>

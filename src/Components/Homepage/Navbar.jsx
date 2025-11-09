@@ -56,7 +56,6 @@ export default function Navbar() {
         <div>
           <ul className="justify-between font-normal text-sm items-center gap-5 hidden lg:flex">
             <li><a href="#home" className="hover:font-medium">Home</a></li>
-            <li><a href="#" className="hover:font-medium">Categories</a></li>
             <li><a href="#articles" className="hover:font-medium">Articles</a></li>
             <li><a href="#publish" className="hover:font-medium">Publish</a></li>
             <Link to="/about" className="hover:text-primary">About</Link>
@@ -124,7 +123,6 @@ export default function Navbar() {
       >
         <ul className="flex flex-col p-2 text-slate-100 font-normal text-sm items-center gap-5">
           <li><a href="#home" className="hover:font-medium">Home</a></li>
-          <li><a href="#" className="hover:font-medium">Categories</a></li>
           <li><a href="#articles" className="hover:font-medium">Articles</a></li>
           <li><a href="#publish" className="hover:font-medium">Publish</a></li>
           <Link to="/about" className="hover:text-primary">About</Link>
