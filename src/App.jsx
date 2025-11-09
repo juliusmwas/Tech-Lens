@@ -7,6 +7,7 @@ import Footer from "./Components/Homepage/Footer";
 import About from "./Components/Pages/About";
 import Profile from "./Components/Users/Profile";
 import Articlespage from "./Components/Pages/Articlespage";
+import SingleArticlePage from "./Components/Pages/SingleArticlePage";
 
 export default function App() {
   return (
@@ -31,6 +32,7 @@ export default function App() {
         <Route path="/about" element={<About />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/Articlespage" element={<Articlespage />} />
+        <Route path="/article/:id" element={<SingleArticlePage />} />
       </Routes>
     </Router>
   );

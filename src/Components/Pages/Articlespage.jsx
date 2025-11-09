@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import { HiOutlineBookOpen } from "react-icons/hi";
 import { FaRegCalendarAlt, FaRegClock, FaRegCommentDots } from "react-icons/fa";
 import { PiHandsClappingLight } from "react-icons/pi";
+import { Link } from "react-router-dom";
+
 
 
 const articles = [
@@ -70,6 +72,7 @@ export default function ArticlesPage() {
           {/* Articles Grid */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {articles.map((article, index) => (
+            <Link to={`/article/${article.id}`} className="block">
               <motion.div
                 key={article.id}
                 initial={{ opacity: 0, y: 40 }}
@@ -143,6 +146,7 @@ export default function ArticlesPage() {
                   </div>
                 </div>
               </motion.div>
+              </Link>
             ))}
           </div>
         </div>
