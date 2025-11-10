@@ -1,92 +1,124 @@
+import { useState, useEffect } from "react";
+import axios from "axios";
 import { FaTwitter, FaGithub, FaLink } from "react-icons/fa";
 import NavbarSimple from "../Homepage/NavbarSimple";
 import FooterSimple from "../Homepage/FooterSimple";
-import { HiOutlineBookOpen } from "react-icons/hi";
-import { FaRegCalendarAlt, FaRegClock, FaRegCommentDots } from "react-icons/fa";
-import { PiHandsClappingLight } from "react-icons/pi";
-import { Link } from "react-router-dom"; 
-import { useState } from "react"; 
-
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Profile() {
-  const articles = [
-    {
-      id: 1,
-      title: "The Future of AI in Everyday Life",
-      excerpt:
-        "Exploring how artificial intelligence will shape productivity and creativity in the next decade.",
-      author: "Julius Mwangi",
-      date: "November 8, 2025",
-      readTime: "5 min read",
-      image: "/ai.jpeg",
-      tags: ["AI", "Future", "Innovation"],
-      claps: 45,
-      comments: 8,
-    },
-    {
-      id: 2,
-      title: "Designing for Humans, Not Screens",
-      excerpt:
-        "Why empathy and accessibility are the cornerstones of great UX design in the digital era.",
-      author: "Julius Mwangi",
-      date: "November 6, 2025",
-      readTime: "4 min read",
-      image: "/uiux.jpeg",
-      tags: ["UX", "Design", "Accessibility"],
-      claps: 62,
-      comments: 14,
-    },
-    {
-      id: 3,
-      title: "Cloud & DevOps: Building Resilient Systems",
-      excerpt:
-        "From containers to CI/CD — how modern DevOps empowers collaboration and uptime.",
-      author: "Julius Mwangi",
-      date: "November 5, 2025",
-      readTime: "6 min read",
-      image: "/devops.jpeg",
-      tags: ["Cloud", "DevOps", "Engineering"],
-      claps: 39,
-      comments: 6,
-    },
-  ];
-
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("Articles");
+  const [userData, setUserData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [sessionExpired, setSessionExpired] = useState(false);
 
+  useEffect(() => {
+    const fetchProfile = async () => {
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        setSessionExpired(true);
+        setLoading(false);
+        return;
+      }
+
+      try {
+        const res = await axios.get("http://localhost:5000/api/user/me", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setUserData(res.data);
+      } catch (error) {
+        console.error("Error fetching profile:", error);
+        if (error.response?.status === 401) {
+          localStorage.removeItem("token");
+          setSessionExpired(true);
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProfile();
+  }, []);
+
+  if (loading) {
+    return (
+      <>
+        <NavbarSimple />
+        <div className="text-center py-40 text-gray-500">Loading profile...</div>
+        <FooterSimple />
+      </>
+    );
+  }
+
+  if (sessionExpired) {
+    return (
+      <>
+        <NavbarSimple />
+        <div className="text-center py-40 text-red-500">
+          <p>Session expired or unauthorized. Please log in again.</p>
+          <Link
+            to="/login"
+            className="mt-4 inline-block px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+          >
+            Go to Login
+          </Link>
+        </div>
+        <FooterSimple />
+      </>
+    );
+  }
+
+  if (!userData) {
+    return (
+      <>
+        <NavbarSimple />
+        <div className="text-center py-40 text-red-500">
+          Failed to load user data.
+        </div>
+        <FooterSimple />
+      </>
+    );
+  }
+
+  const articles = []; // placeholder for later fetching user articles
 
   return (
     <>
       <NavbarSimple />
-      <section className=" mx-5 mt-10 bg-white rounded-lg shadow-sm">
-        {/* Banner */}
+      <section className="mx-5 mt-10 bg-white rounded-lg shadow-sm">
         <div className="relative h-48 bg-gradient-to-r from-blue-400 to-purple-600 rounded-t-lg">
           <img
-            src="/profile-pic.jpeg"
+            src={userData.avatarUrl || "/default-avatar.jpg"}
             alt="Profile"
             className="absolute left-1/2 -bottom-12 transform -translate-x-1/2 w-28 h-28 rounded-full border-4 border-white shadow-lg object-cover"
           />
         </div>
 
-        {/* Profile Info */}
         <div className="mt-16 text-center">
-          <h1 className="text-2xl font-bold">Julius Mwangi</h1>
-          <p className="text-gray-500">@julius_dev</p>
+          <h1 className="text-2xl font-bold">{userData.username}</h1>
           <p className="max-w-xl mx-auto mt-3 text-gray-700 text-sm">
-            Frontend Developer passionate about creating elegant UIs and exploring
-            the intersection of technology, design, and human experience.
+            {userData.bio || "No bio added yet."}
           </p>
 
-          {/* Social Links */}
           <div className="flex justify-center gap-4 mt-4 text-gray-600">
-            <a href="#" className="hover:text-blue-500">
-              <FaTwitter />
-            </a>
-            <a href="#" className="hover:text-gray-800">
-              <FaGithub />
-            </a>
-            <a href="#" className="hover:text-blue-700">
-              <FaLink />
-            </a>
+            {userData.twitter && (
+              <a href={userData.twitter} className="hover:text-blue-500">
+                <FaTwitter />
+              </a>
+            )}
+            {userData.github && (
+              <a href={userData.github} className="hover:text-gray-800">
+                <FaGithub />
+              </a>
+            )}
+            {userData.website && (
+              <a href={userData.website} className="hover:text-blue-700">
+                <FaLink />
+              </a>
+            )}
           </div>
 
           <button className="mt-5 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
@@ -94,27 +126,25 @@ export default function Profile() {
           </button>
         </div>
 
-        {/* Stats */}
         <div className="flex justify-center mt-6 space-x-8 text-center">
           <div>
-            <p className="text-xl font-bold text-gray-800">12</p>
+            <p className="text-xl font-bold text-gray-800">{userData.articlesCount || 0}</p>
             <p className="text-sm text-gray-500">Articles</p>
           </div>
           <div>
-            <p className="text-xl font-bold text-gray-800">356</p>
-            <p className="text-sm text-gray-500">Likes</p>
+            <p className="text-xl font-bold text-gray-800">{userData.commentsCount || 0}</p>
+            <p className="text-sm text-gray-500">Comments</p>
           </div>
           <div>
-            <p className="text-xl font-bold text-gray-800">280</p>
+            <p className="text-xl font-bold text-gray-800">{userData.followers?.length || 0}</p>
             <p className="text-sm text-gray-500">Followers</p>
           </div>
           <div>
-            <p className="text-xl font-bold text-gray-800">194</p>
+            <p className="text-xl font-bold text-gray-800">{userData.following?.length || 0}</p>
             <p className="text-sm text-gray-500">Following</p>
           </div>
         </div>
 
-        {/* Tabs Section */}
         <div className="flex justify-center mt-8 border-b border-gray-200">
           {["Articles", "Comments", "Reading List"].map((tab) => (
             <button
@@ -131,97 +161,23 @@ export default function Profile() {
           ))}
         </div>
 
-        {/* Dynamic Tab Content */}
         <div className="p-8">
           {activeTab === "Articles" && (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {articles.map((article) => (
-                <Link
-                  key={article.id}
-                  to={`/article/${article.id}`}
-                  className="block"
-                >
-                  <div className="bg-white rounded-2xl shadow-md hover:shadow-xl overflow-hidden transition-all duration-300 hover:-translate-y-1">
-                    <img
-                      src={article.image}
-                      alt={article.title}
-                      className="w-full h-48 object-cover"
-                    />
-                    <div className="p-6 flex flex-col min-h-[300px]">
-                      <div>
-                        <div className="flex gap-2 mb-3 flex-wrap">
-                          {article.tags.map((tag) => (
-                            <span
-                              key={tag}
-                              className="bg-slate-100 text-slate-700 text-xs font-medium px-3 py-1 rounded-full"
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                        <h2 className="text-lg md:text-xl font-semibold text-slate-900 mb-2">
-                          {article.title}
-                        </h2>
-                        <p className="text-gray-600 text-sm mb-4">{article.excerpt}</p>
-                      </div>
-
-                      <div className="mt-auto pt-3 border-t border-gray-100 flex items-center justify-between text-gray-600 text-xs">
-                        <div className="flex items-center gap-2">
-                          <HiOutlineBookOpen size={15} className="text-slate-500" />
-                          <span>{article.author}</span>
-                        </div>
-
-                        <div className="flex items-center gap-3">
-                          <div className="flex items-center gap-1">
-                            <FaRegCalendarAlt size={13} className="text-slate-500" />
-                            <span>
-                              {new Date(article.date).toLocaleDateString("en-US", {
-                                day: "numeric",
-                                month: "short",
-                                year: "numeric",
-                              })}
-                            </span>
-                          </div>
-
-                          <div className="flex items-center gap-1">
-                            <FaRegClock size={13} className="text-slate-500" />
-                            <span>{article.readTime}</span>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="mt-2 flex items-center justify-between text-gray-500 text-sm">
-                        <div className="flex items-center gap-4">
-                          <button className="flex items-center gap-1 hover:text-blue-600 transition">
-                            <PiHandsClappingLight size={15} /> {article.claps}
-                          </button>
-                          <button className="flex items-center gap-1 hover:text-blue-600 transition">
-                            <FaRegCommentDots size={15} /> {article.comments}
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              ))}
+            <div className="text-center text-gray-600 py-20">
+              <p>No articles yet 📝</p>
             </div>
           )}
-
           {activeTab === "Comments" && (
             <div className="text-center text-gray-600 py-20">
-              <p>No comments yet 💬</p>
+              <p>{userData.commentsCount || 0} comments posted 💬</p>
             </div>
           )}
-
           {activeTab === "Reading List" && (
             <div className="text-center text-gray-600 py-20">
               <p>Your reading list is empty 📚</p>
             </div>
           )}
         </div>
-
-
-        
       </section>
       <FooterSimple />
     </>
