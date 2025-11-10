@@ -1,16 +1,27 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { FaTwitter, FaGithub, FaLink } from "react-icons/fa";
-import NavbarSimple from "../Homepage/NavbarSimple";
+import ProfileNavbar from "../Homepage/ProfileNavbar";
 import FooterSimple from "../Homepage/FooterSimple";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Profile() {
-  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("Articles");
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [sessionExpired, setSessionExpired] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    bio: "",
+    twitter: "",
+    github: "",
+    website: "",
+  });
+  const [avatar, setAvatar] = useState(null);
+  const [preview, setPreview] = useState(null);
+  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -24,11 +35,17 @@ export default function Profile() {
 
       try {
         const res = await axios.get("http://localhost:5000/api/user/me", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          headers: { Authorization: `Bearer ${token}` },
         });
         setUserData(res.data);
+        setFormData({
+          username: res.data.username || "",
+          email: res.data.email || "",
+          bio: res.data.bio || "",
+          twitter: res.data.twitter || "",
+          github: res.data.github || "",
+          website: res.data.website || "",
+        });
       } catch (error) {
         console.error("Error fetching profile:", error);
         if (error.response?.status === 401) {
@@ -43,10 +60,52 @@ export default function Profile() {
     fetchProfile();
   }, []);
 
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setAvatar(file);
+      setPreview(URL.createObjectURL(file));
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setSaving(true);
+
+    try {
+      const token = localStorage.getItem("token");
+      const formDataToSend = new FormData();
+
+      for (let key in formData) {
+        formDataToSend.append(key, formData[key]);
+      }
+      if (avatar) formDataToSend.append("avatar", avatar);
+
+      const res = await axios.put("http://localhost:5000/api/user/me", formDataToSend, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      setUserData(res.data.user);
+      setShowModal(false);
+    } catch (error) {
+      console.error("Profile update failed:", error);
+      alert("Failed to update profile");
+    } finally {
+      setSaving(false);
+    }
+  };
+
   if (loading) {
     return (
       <>
-        <NavbarSimple />
+        <ProfileNavbar />
         <div className="text-center py-40 text-gray-500">Loading profile...</div>
         <FooterSimple />
       </>
@@ -56,7 +115,7 @@ export default function Profile() {
   if (sessionExpired) {
     return (
       <>
-        <NavbarSimple />
+        <ProfileNavbar />
         <div className="text-center py-40 text-red-500">
           <p>Session expired or unauthorized. Please log in again.</p>
           <Link
@@ -74,7 +133,7 @@ export default function Profile() {
   if (!userData) {
     return (
       <>
-        <NavbarSimple />
+        <ProfileNavbar />
         <div className="text-center py-40 text-red-500">
           Failed to load user data.
         </div>
@@ -83,11 +142,11 @@ export default function Profile() {
     );
   }
 
-  const articles = []; // placeholder for later fetching user articles
+  const articles = []; // placeholder
 
   return (
     <>
-      <NavbarSimple />
+      <ProfileNavbar />
       <section className="mx-5 mt-10 bg-white rounded-lg shadow-sm">
         <div className="relative h-48 bg-gradient-to-r from-blue-400 to-purple-600 rounded-t-lg">
           <img
@@ -121,7 +180,10 @@ export default function Profile() {
             )}
           </div>
 
-          <button className="mt-5 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+          <button
+            onClick={() => setShowModal(true)}
+            className="mt-5 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+          >
             Edit Profile
           </button>
         </div>
@@ -179,6 +241,93 @@ export default function Profile() {
           )}
         </div>
       </section>
+
+      {/* ✅ Edit Profile Modal */}
+      {showModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+          <div className="bg-white rounded-xl p-6 w-96 relative">
+            <h2 className="text-lg font-semibold mb-4">Edit Profile</h2>
+            <form onSubmit={handleSubmit} className="space-y-3">
+              <input
+                type="text"
+                name="username"
+                value={formData.username}
+                onChange={handleChange}
+                placeholder="Username"
+                className="w-full border rounded-lg px-3 py-2"
+              />
+              <textarea
+                name="bio"
+                value={formData.bio}
+                onChange={handleChange}
+                placeholder="Bio"
+                className="w-full border rounded-lg px-3 py-2"
+              />
+              <input
+                type="text"
+                name="twitter"
+                value={formData.twitter}
+                onChange={handleChange}
+                placeholder="Twitter URL"
+                className="w-full border rounded-lg px-3 py-2"
+              />
+              <input
+                type="text"
+                name="github"
+                value={formData.github}
+                onChange={handleChange}
+                placeholder="GitHub URL"
+                className="w-full border rounded-lg px-3 py-2"
+              />
+              <input
+                type="text"
+                name="website"
+                value={formData.website}
+                onChange={handleChange}
+                placeholder="Website"
+                className="w-full border rounded-lg px-3 py-2"
+              />
+
+              <div>
+                <label className="block text-sm text-gray-600 mb-1">
+                  Change Avatar
+                </label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleFileChange}
+                  className="w-full"
+                />
+                {preview && (
+                  <img
+                    src={preview}
+                    alt="Preview"
+                    className="mt-2 w-20 h-20 rounded-full object-cover"
+                  />
+                )}
+              </div>
+
+              <div className="flex justify-end gap-3 mt-4">
+                <button
+                  type="button"
+                  onClick={() => setShowModal(false)}
+                  className="px-4 py-2 bg-gray-300 rounded-lg"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  disabled={saving}
+                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+                >
+                  {saving ? "Saving..." : "Save"}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
       <FooterSimple />
     </>
   );
