@@ -1,112 +1,96 @@
+// src/Components/Pages/SingleArticlePage.jsx
+import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import { FaRegClock, FaRegCalendarAlt, FaRegCommentDots } from "react-icons/fa";
-import { PiHandsClappingLight } from "react-icons/pi";
+import axios from "axios";
 import ArticlesNavbar from "../Homepage/ArticlesNavbar";
-
-const articles = [
-  {
-    id: 1,
-    title: "Mastering the MERN Stack — From Beginner to Deployer",
-    content: `
-      The MERN stack (MongoDB, Express, React, Node.js) is the modern developer’s toolkit
-      for building fast, scalable full-stack web apps. In this guide, we’ll break down
-      each layer, from setting up your Node.js API to deploying your React frontend on the cloud.
-
-      ### 1. Understanding the Stack
-      - **MongoDB** — A NoSQL database that stores data as JSON-like documents.
-      - **Express.js** — A flexible Node.js framework for APIs.
-      - **React.js** — A frontend library for building dynamic UIs.
-      - **Node.js** — The runtime environment powering your backend logic.
-
-      ### 2. Building a Project
-      Create your backend routes, connect your database, and integrate them with your frontend using Axios or Fetch API.
-    `,
-    author: "Julius Mwangi",
-    date: "2025-11-08",
-    readTime: "6 min read",
-    image:
-      "https://images.unsplash.com/photo-1581091012184-7f3a2b5a57c4?auto=format&fit=crop&w=900&q=80",
-    tags: ["MERN", "Full-Stack", "Guide"],
-  },
-  // ... other articles
-];
+import { HiOutlineBookOpen } from "react-icons/hi";
+import { FaRegCalendarAlt, FaRegClock, FaRegCommentDots } from "react-icons/fa";
+import { PiHandsClappingLight } from "react-icons/pi";
+import ReactMarkdown from "react-markdown"; // for dev.to markdown rendering
 
 export default function SingleArticlePage() {
   const { id } = useParams();
-  const article = articles.find((a) => a.id === Number(id));
+  const [article, setArticle] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-  if (!article) return <p className="text-center mt-20">Article not found 😢</p>;
+  const fetchArticle = async () => {
+    setLoading(true);
+    setError("");
+    try {
+      const res = await axios.get(`http://localhost:5000/api/articles/${id}`);
+      setArticle(res.data);
+    } catch (err) {
+      console.error("Failed to fetch article:", err);
+      setError(err.response?.data?.message || "Failed to load article");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchArticle();
+  }, [id]);
+
+  const formatDate = (isoDate) =>
+    new Date(isoDate).toLocaleDateString("en-US", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    });
+
+  if (loading) return <div className="p-6 text-center">Loading article...</div>;
+  if (error) return <div className="p-6 text-red-600 text-center">{error}</div>;
+  if (!article) return null;
 
   return (
     <>
       <ArticlesNavbar />
 
-      <motion.div
-        className="min-h-screen bg-gray-50 pb-16"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-      >
-        {/* Hero Section */}
-        <div className="relative w-full h-72 md:h-[400px] overflow-hidden">
-          <img
-            src={article.image}
-            alt={article.title}
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-black/40 flex flex-col justify-end p-8 text-white">
-            <h1 className="text-3xl md:text-5xl font-bold mb-2">{article.title}</h1>
-            <div className="flex items-center gap-4 text-sm text-gray-200">
-              <span>{article.author}</span>
-              <span>•</span>
-              <FaRegCalendarAlt />{" "}
-              {new Date(article.date).toLocaleDateString("en-US", {
-                day: "numeric",
-                month: "short",
-                year: "numeric",
-              })}
-              <span>•</span>
-              <FaRegClock /> {article.readTime}
+      <div className="min-h-screen bg-gray-50 py-16 px-6 md:px-12 lg:px-24">
+        <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-md p-8">
+          {/* Article Header */}
+          <h1 className="text-4xl font-bold mb-4">{article.title}</h1>
+          <div className="flex items-center gap-4 text-gray-600 text-sm mb-6">
+            <div className="flex items-center gap-1">
+              <HiOutlineBookOpen size={16} /> {article.author}
+            </div>
+            <div className="flex items-center gap-1">
+              <FaRegCalendarAlt size={16} /> {formatDate(article.date)}
+            </div>
+            <div className="flex items-center gap-1">
+              <FaRegClock size={16} /> {article.readTime || "—"}
+            </div>
+            <div className="flex items-center gap-1">
+              <PiHandsClappingLight size={16} /> {article.claps || 0}
             </div>
           </div>
-        </div>
 
-        {/* Content */}
-        <div className="max-w-4xl mx-auto px-6 md:px-12 mt-10">
-          <div className="flex gap-2 mb-4 flex-wrap">
-            {article.tags.map((tag) => (
-              <span
-                key={tag}
-                className="bg-slate-100 text-slate-700 text-xs font-medium px-3 py-1 rounded-full"
-              >
-                {tag}
-              </span>
-            ))}
+          {article.image && (
+            <img
+              src={article.image}
+              alt={article.title}
+              className="w-full h-64 object-cover rounded mb-6"
+            />
+          )}
+
+          {/* Article Body */}
+          <div className="prose max-w-full">
+            {article.body ? (
+              <ReactMarkdown>{article.body}</ReactMarkdown>
+            ) : (
+              <p>{article.excerpt}</p>
+            )}
           </div>
 
-          <motion.div
-            initial={{ y: 40, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.6 }}
-            className="prose prose-slate max-w-none"
-            dangerouslySetInnerHTML={{ __html: article.content.replace(/\n/g, "<br/>") }}
-          />
-
-          {/* Reaction Bar */}
-          <div className="mt-10 flex items-center gap-6 text-slate-600">
-            <div className="flex items-center gap-1 hover:text-slate-800 cursor-pointer">
-              <PiHandsClappingLight size={16} /> <span>24</span>
-            </div>
-            <div className="flex items-center gap-1 hover:text-slate-800 cursor-pointer">
-              <FaRegCommentDots size={16} /> <span>8</span>
-            </div>
-            <Link to="/" className="ml-auto text-slate-500 hover:text-slate-700 text-sm">
-              ← Back to Articles
+          {/* Back & More Articles */}
+          <div className="mt-8 flex justify-between">
+            <Link to="/articles" className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300">
+              Back to Articles
             </Link>
           </div>
         </div>
-      </motion.div>
+      </div>
     </>
   );
 }
